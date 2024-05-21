@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Playlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        video {
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Playlist</h1>
+    <video id="videoPlayer" controls autoplay></video>
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        
+        // List of video URLs
+        const videoList = [
+            'https://www.w3schools.com/html/mov_bbb.mp4', // Video 1
+            'https://www.w3schools.com/html/movie.mp4',   // Video 2
+            // Add more video URLs as needed
+        ];
+
+        let currentVideoIndex = 0;
+
+        function loadVideo(index) {
+            if (index >= 0 && index < videoList.length) {
+                videoPlayer.src = videoList[index];
+                videoPlayer.load();
+                videoPlayer.play();
+            }
+        }
+
+        videoPlayer.addEventListener('ended', () => {
+            currentVideoIndex++;
+            if (currentVideoIndex >= videoList.length) {
+                currentVideoIndex = 0; // Loop back to the first video
+            }
+            loadVideo(currentVideoIndex);
+        });
+
+        // Load the first video initially
+        loadVideo(currentVideoIndex);
+    </script>
+</body>
+</html>
